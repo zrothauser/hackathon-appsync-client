@@ -7,8 +7,7 @@ import { Router } from "@reach/router"
 import Home from '../Home';
 import Post from '../Post';
 
-import logo from '../../logo.svg';
-import './App.css';
+import 'unibody/style.scss';
 import appSyncConfig from '../../appsync-config';
 
 class App extends Component {
@@ -16,8 +15,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">AppSync</h1>
+          <h2 className="App-title">AppSync</h2>
         </header>
         <Router>
           <Home path="/" />
