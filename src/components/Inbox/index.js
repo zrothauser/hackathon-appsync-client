@@ -5,8 +5,6 @@ import inboxSubscriptionAll from '../../graphql/inboxSubscriptionAll'
 
 class Inbox extends Component {
     render() {
-        console.log(this.props.data);
-
         return (
             <div>
                 {this.props.data && this.props.data.inbox && this.props.data.inbox.body}

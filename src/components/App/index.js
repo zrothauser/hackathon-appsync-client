@@ -3,32 +3,28 @@ import React, { Component } from 'react';
 import { ApolloProvider } from "react-apollo";
 import AWSAppSyncClient, { defaultDataIdFromObject } from "aws-appsync";
 import { Rehydrated } from "aws-appsync-react";
-
-import Inbox from '../Inbox';
+import { Router, Link } from "@reach/router"
+import Home from '../Home';
+import Post from '../Post';
 
 import logo from '../../logo.svg';
 import './App.css';
 import appSyncConfig from '../../appsync-config';
 
+let Dash = () => <div>Dash</div>;
+
 class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-    };
-  }
-
-  componentDidMount() {
-  }
-
   render() {
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          <h1 className="App-title">AppSync</h1>
         </header>
-        <Inbox />
+        <Router>
+          <Home path="/" />
+          <Post path="/posts/:slug" />
+        </Router>
       </div>
     );
   }
