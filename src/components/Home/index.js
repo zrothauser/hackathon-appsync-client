@@ -32,6 +32,11 @@ const Home = () => (
       ))}
     </ul>
     <Inbox />
+    <style jsx>{`
+      ul {
+        list-style: none;
+      }
+    `}</style>
   </div>
 );
 
