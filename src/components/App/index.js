@@ -3,15 +3,13 @@ import React, { Component } from 'react';
 import { ApolloProvider } from "react-apollo";
 import AWSAppSyncClient, { defaultDataIdFromObject } from "aws-appsync";
 import { Rehydrated } from "aws-appsync-react";
-import { Router, Link } from "@reach/router"
+import { Router } from "@reach/router"
 import Home from '../Home';
 import Post from '../Post';
 
 import logo from '../../logo.svg';
 import './App.css';
 import appSyncConfig from '../../appsync-config';
-
-let Dash = () => <div>Dash</div>;
 
 class App extends Component {
   render() {

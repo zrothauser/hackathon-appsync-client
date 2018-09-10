@@ -26,7 +26,7 @@ const Home = () => (
     <h1>Home</h1>
     <ul>
       {posts.map(({ title, slug }) => (
-        <li>
+        <li key={slug}>
           <Link to={`posts/${slug}`}>{title}</Link>
         </li>
       ))}
