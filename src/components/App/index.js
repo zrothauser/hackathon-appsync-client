@@ -4,11 +4,11 @@ import { ApolloProvider } from "react-apollo";
 import AWSAppSyncClient, { defaultDataIdFromObject } from "aws-appsync";
 import { Rehydrated } from "aws-appsync-react";
 
-import Inbox from './Inbox';
+import Inbox from '../Inbox';
 
-import logo from './logo.svg';
+import logo from '../../logo.svg';
 import './App.css';
-import appSyncConfig from './appsync-config';
+import appSyncConfig from '../../appsync-config';
 
 class App extends Component {
   constructor(props) {

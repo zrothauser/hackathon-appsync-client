@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { graphql } from "react-apollo";
 
-import inboxSubscriptionAll from './graphql/inboxSubscriptionAll'
+import inboxSubscriptionAll from '../../graphql/inboxSubscriptionAll'
 
 class Inbox extends Component {
     render() {
