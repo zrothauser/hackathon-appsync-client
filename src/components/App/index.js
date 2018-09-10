@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { ApolloProvider } from "react-apollo";
 import AWSAppSyncClient, { defaultDataIdFromObject } from "aws-appsync";
 import { Rehydrated } from "aws-appsync-react";
-import { Router } from "@reach/router"
+import { Router, Link } from "@reach/router"
 import Home from '../Home';
 import Post from '../Post';
 
@@ -15,7 +15,9 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h2 className="App-title">AppSync</h2>
+          <h2 className="App-title">
+            <Link to="/">AppSync Client</Link>
+          </h2>
         </header>
         <Router>
           <Home path="/" />
