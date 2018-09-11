@@ -1,12 +1,14 @@
 import gql from 'graphql-tag';
 
-export default gql`
-{
+const QUERY = gql`
+  query Post($slug: String!) {
     postBy(slug: $slug) {
       id
       title
       date
       content
-      slug
     }
-}`;
+  }
+`;
+
+export default QUERY;

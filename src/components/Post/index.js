@@ -1,38 +1,35 @@
 import React from 'react';
 import { Query } from "react-apollo";
-
-import {
-  Container,
-  Header,
-} from 'semantic-ui-react'
+import { Container, Header } from 'semantic-ui-react'
 
 import Inbox from '../Inbox';
 
+import wordpressClient from '../../api/wordpress-client';
 import QUERY_POST from '../../graphql/post';
 
-import posts from '../../test-data';
+// import posts from '../../test-data';
 
 const Post = ({ slug }) => {
-  const data = posts[0];
-
   return (
-    <Query query={QUERY_POST} variables={{ slug }}>
+    <Query query={QUERY_POST} variables={{ slug }} client={wordpressClient}>
       {({ loading, error, data }) => {
         if (loading) {
           return null;
         }
 
         if (error) {
-          console.error(`Error!: ${error}`);
+          console.error('Error!', error);
           return 'Error loading post';
         }
+
+        const postData = data.postBy;
 
         const {
           title,
           author,
           timestamp,
           content,
-        } = data;
+        } = postData;
 
         return (
           <Container text style={{ marginTop: '7em' }}>
@@ -42,7 +39,8 @@ const Post = ({ slug }) => {
             <div>
               <div>Author: {author}</div>
               <div>Posted at: {timestamp}</div>
-              <div>{content}</div>
+              <div>Content:</div>
+              <div dangerouslySetInnerHTML={{__html: content}} />
             </div>
             <div>
               <span>Reactions:</span>

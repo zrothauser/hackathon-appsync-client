@@ -1,21 +1,16 @@
 import React, { Component } from 'react';
 
 import { ApolloProvider } from "react-apollo";
-import AWSAppSyncClient, { defaultDataIdFromObject } from "aws-appsync";
 import { Rehydrated } from "aws-appsync-react";
 import { Router, Link } from "@reach/router"
+import { Container, Menu } from 'semantic-ui-react'
 
-import {
-  Container,
-  Menu,
-} from 'semantic-ui-react'
+import appSyncClient from '../../api/appsync-client';
 
 import Home from '../Home';
 import Post from '../Post';
 
 import 'semantic-ui-css/semantic.min.css';
-
-import APPSYNC_CONFIG from '../../appsync-config';
 
 class App extends Component {
   render() {
@@ -38,34 +33,8 @@ class App extends Component {
   }
 }
 
-const client = new AWSAppSyncClient({
-  url: APPSYNC_CONFIG.graphqlEndpoint,
-  region: APPSYNC_CONFIG.region,
-  auth: {
-    type: APPSYNC_CONFIG.authenticationType,
-    apiKey: APPSYNC_CONFIG.apiKey,
-  },
-  cacheOptions: {
-    dataIdFromObject: (obj) => {
-      let id = defaultDataIdFromObject(obj);
-
-      if (!id) {
-        const { __typename: typename } = obj;
-        switch (typename) {
-          case 'Comment':
-            return `${typename}:${obj.commentId}`;
-          default:
-            return id;
-        }
-      }
-
-      return id;
-    }
-  }
-});
-
 const WithProvider = () => (
-  <ApolloProvider client={client}>
+  <ApolloProvider client={appSyncClient}>
     <Rehydrated>
       <App />
     </Rehydrated>
