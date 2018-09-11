@@ -12,6 +12,8 @@ import {
   List,
 } from 'semantic-ui-react';
 
+import 'typeface-shrikhand/index.css';
+
 import 'semantic-ui-css/semantic.min.css';
 
 import appSyncClient from '../../api/appsync-client';
@@ -25,10 +27,13 @@ const NotFound = () => (<div>404</div>);
 
 const App = () => (
   <div>
-    <Segment inverted>
-      <Menu fixed="top" inverted>
+    <Segment>
+      <Menu fixed="top" inverted style={{ background: '#060327' }}>
         <Container>
-          <Menu.Item header>
+          <Menu.Item
+            header
+            style={{ fontFamily: 'Shrikhand, cursive', fontSize: '32px', fontWeight: '400' }}
+          >
             <Link to="/">GAMEZ</Link>
           </Menu.Item>
 
@@ -53,7 +58,7 @@ const App = () => (
       </Router>
     </Segment>
 
-    <Segment inverted vertical style={{ padding: '5em 0em' }}>
+    <Segment inverted vertical style={{ padding: '5em 0em', background: '#060327' }}>
       <Container>
         <Grid divided inverted stackable>
           <Grid.Row>
