@@ -13,7 +13,7 @@ const ReviewExcerpt = ({
   <Item
     key={url}
     as="a"
-    href={url}
+    href={`http://ign.com${url}`} // this isn't a real URL from the dataset
     target="_blank"
   >
     <Item.Image
