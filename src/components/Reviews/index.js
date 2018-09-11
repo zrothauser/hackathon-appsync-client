@@ -30,15 +30,14 @@ class Reviews extends Component {
         </Header>
 
         <Form>
-          <Form.Group>
-            <Form.Field
-              id="search-form-field"
-              control={Input}
-              placeholder="Fake Review"
-              label="Search for reviews"
-              onChange={event => this.setState({ searchTerms: event.target.value })}
-            />
-          </Form.Group>
+          <Form.Field
+            id="search-form-field"
+            control={Input}
+            label="Search for reviews"
+            onChange={event => this.setState({ searchTerms: event.target.value })}
+            icon="search"
+            iconPosition="left"
+          />
         </Form>
 
         <Query
