@@ -1,6 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Item } from 'semantic-ui-react';
+import moment from 'moment';
+
+export const formatTimestamp = (timestamp) => {
+  const timeObject = moment(timestamp);
+  return timeObject.format('dddd, MMMM Do YYYY');
+};
 
 const PostExcerpt = ({
   title,
@@ -37,7 +43,7 @@ const PostExcerpt = ({
             {title}
           </Item.Header>
           <div style={{ color: '#ffffff' }}>
-            {date}
+            {formatTimestamp(date)}
           </div>
           <div
             // eslint-disable-next-line react/no-danger
@@ -67,7 +73,7 @@ const PostExcerpt = ({
           {title}
         </Item.Header>
         <div style={{ color: 'grey' }}>
-          {date}
+          {formatTimestamp(date)}
         </div>
         <div
           // eslint-disable-next-line react/no-danger

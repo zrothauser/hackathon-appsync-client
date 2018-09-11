@@ -9,6 +9,8 @@ import QUERY_POST from '../../graphql/post';
 import INBOX_SUB from '../../graphql/inboxSubscription';
 import MESSAGE_MUTATION from '../../graphql/messageMutation';
 
+import { formatTimestamp } from '../PostExcerpt'; // refactor this later
+
 let childAddReaction;
 const Post = ({ slug }) => (
   <Query
@@ -42,7 +44,7 @@ const Post = ({ slug }) => (
             </Header>
             <div>
               <div>Author: {author}</div>
-              <div>Posted at: {timestamp}</div>
+              <div>Posted at: {formatTimestamp(timestamp)}</div>
               <div>Content:</div>
               <div
                 // eslint-disable-next-line react/no-danger
