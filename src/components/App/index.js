@@ -4,21 +4,31 @@ import { ApolloProvider } from "react-apollo";
 import AWSAppSyncClient, { defaultDataIdFromObject } from "aws-appsync";
 import { Rehydrated } from "aws-appsync-react";
 import { Router, Link } from "@reach/router"
+
+import {
+  Container,
+  Menu,
+} from 'semantic-ui-react'
+
 import Home from '../Home';
 import Post from '../Post';
 
-import 'unibody/style.scss';
-import appSyncConfig from '../../appsync-config';
+import 'semantic-ui-css/semantic.min.css';
+
+import APPSYNC_CONFIG from '../../appsync-config';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <h2 className="App-title">
-            <Link to="/">AppSync Client</Link>
-          </h2>
-        </header>
+      <div>
+        <Menu fixed='top' inverted>
+          <Container>
+            <Menu.Item>
+              <Link to="/">AppSync Client</Link>
+            </Menu.Item>
+          </Container>
+        </Menu>
+
         <Router>
           <Home path="/" />
           <Post path="/posts/:slug" />
@@ -29,11 +39,11 @@ class App extends Component {
 }
 
 const client = new AWSAppSyncClient({
-  url: appSyncConfig.graphqlEndpoint,
-  region: appSyncConfig.region,
+  url: APPSYNC_CONFIG.graphqlEndpoint,
+  region: APPSYNC_CONFIG.region,
   auth: {
-    type: appSyncConfig.authenticationType,
-    apiKey: appSyncConfig.apiKey,
+    type: APPSYNC_CONFIG.authenticationType,
+    apiKey: APPSYNC_CONFIG.apiKey,
   },
   cacheOptions: {
     dataIdFromObject: (obj) => {

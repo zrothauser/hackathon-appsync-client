@@ -1,13 +1,20 @@
 import React from 'react';
 import { Query } from "react-apollo";
 
+import {
+  Container,
+  Header,
+} from 'semantic-ui-react'
+
 import Inbox from '../Inbox';
 
 import QUERY_POST from '../../graphql/post';
 
-// import posts from '../../test-data';
+import posts from '../../test-data';
 
 const Post = ({ slug }) => {
+  const data = posts[0];
+
   return (
     <Query query={QUERY_POST} variables={{ slug }}>
       {({ loading, error, data }) => {
@@ -28,9 +35,11 @@ const Post = ({ slug }) => {
         } = data;
 
         return (
-          <article>
+          <Container text style={{ marginTop: '7em' }}>
+            <Header as='h1'>
+              {title}
+            </Header>
             <div>
-              <h1>{title}</h1>
               <div>Author: {author}</div>
               <div>Posted at: {timestamp}</div>
               <div>{content}</div>
@@ -42,7 +51,7 @@ const Post = ({ slug }) => {
               <span>Comments:</span>
               <Inbox />
             </div>
-          </article>
+          </Container>
         );
       }}
     </Query>
