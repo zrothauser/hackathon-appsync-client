@@ -5,7 +5,11 @@ import {
   Header,
   Form,
   Input,
+  Item,
+  Divider,
 } from 'semantic-ui-react';
+
+import ReviewExcerpt from '../ReviewExcerpt';
 
 import QUERY_REVIEWS from '../../graphql/searchReviews';
 
@@ -53,28 +57,33 @@ class Reviews extends Component {
 
             const reviews = data.getReviewByTitle;
 
+            console.log(reviews); // eslint-disable-line
+
             return (
-              <div>
-                <h2>Results</h2>
+              <React.Fragment>
+                <Divider section />
                 <div>
-                  {reviews.length ?
-                    <ul>
-                      {reviews.map(({ title, url }) => (
-                        <li key={url}>
-                          <a
-                            href={url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            {title}
-                          </a>
-                        </li>
-                      ))}
-                    </ul> :
-                    'No reviews found'
-                  }
+                  <Header
+                    as="h3"
+                    content="Results"
+                  />
+
+                  <Container>
+                    {reviews.length ?
+                      <Item.Group divided>
+                        {reviews.map(review => (
+                          <ReviewExcerpt
+                            {...review}
+                            imageURL="https://loremflickr.com/320/240/dog"
+                          />
+                        ))
+                        }
+                      </Item.Group>
+                    : 'No reviews found'
+                    }
+                  </Container>
                 </div>
-              </div>
+              </React.Fragment>
             );
           }}
         </Query>
