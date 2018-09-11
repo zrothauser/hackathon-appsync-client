@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Query } from 'react-apollo';
 import {
+  Loader,
   Container,
   Header,
   Form,
@@ -30,15 +31,14 @@ class Reviews extends Component {
         </Header>
 
         <Form>
-          <Form.Group>
-            <Form.Field
-              id="search-form-field"
-              control={Input}
-              placeholder="Fake Review"
-              label="Search for reviews"
-              onChange={event => this.setState({ searchTerms: event.target.value })}
-            />
-          </Form.Group>
+          <Form.Field
+            id="search-form-field"
+            control={Input}
+            label="Search for reviews"
+            onChange={event => this.setState({ searchTerms: event.target.value })}
+            icon="search"
+            iconPosition="left"
+          />
         </Form>
 
         <Query
@@ -47,7 +47,9 @@ class Reviews extends Component {
         >
           {({ loading, error, data }) => {
             if (loading) {
-              return null;
+              return (
+                <Loader>Loading</Loader>
+              );
             }
 
             if (error) {

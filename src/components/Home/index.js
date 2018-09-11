@@ -3,6 +3,7 @@ import { Query } from 'react-apollo';
 import {
   Container,
   Item,
+  Loader,
 } from 'semantic-ui-react';
 
 import PostExcerpt from '../PostExcerpt';
@@ -17,7 +18,9 @@ const Home = () => (
   >
     {({ loading, error, data }) => {
       if (loading) {
-        return null;
+        return (
+          <Loader>Loading</Loader>
+        );
       }
 
       if (error) {
