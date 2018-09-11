@@ -1,10 +1,10 @@
 import gql from 'graphql-tag';
 
 export default gql`
-subscription Inbox($to: String) {
-  inbox(to: $to) {
+subscription Inbox($context: String) {
+  inbox(context: $context) {
     from
-    to
+    context
     body
   }
 }`;

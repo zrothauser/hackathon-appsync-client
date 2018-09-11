@@ -6,8 +6,10 @@ import icons from 'react-reactions/src/helpers/icons';
 
 const Item = posed.li({
   enter: {
-    y: -1000,
-    transition: { duration: 2000 },
+    y: -500,
+    left: 5,
+    scale: 0.0,
+    transition: { duration: 5000 },
   },
 });
 
@@ -18,12 +20,16 @@ const makeId = (prefix = 'id') => {
   return `${prefix}${lastId}`;
 };
 
-const ItemList = ({ items, remove }) => (
+const ItemList = ({ items }) => (
   <ul className="list">
     <PoseGroup>
       {items.map(item =>
         (
-          <Item className="reaction" onPoseComplete={() => remove(item.id)} key={item.id}>
+          <Item
+            className="reaction"
+            // onPoseComplete={() => remove(item.id)}
+            key={item.id}
+          >
             <img alt="" src={icons.find('facebook', item.text)} />
           </Item>
         ))}
@@ -38,27 +44,32 @@ const ItemList = ({ items, remove }) => (
 );
 
 ItemList.propTypes = {
-  items: PropTypes.shape({
-    id: PropTypes.number,
+  items: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string,
     text: PropTypes.string,
-  }).isRequired,
-  remove: PropTypes.func.isRequired,
+  })).isRequired,
+  // remove: PropTypes.func.isRequired,
 };
 
 class Reactions extends React.PureComponent {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
-      isVisible: true,
       items: [],
     };
 
-    this.componentDidMount = this.componentDidMount.bind(this);
+    this.addReaction = this.addReaction.bind(this);
   }
 
   componentDidMount() {
-    setInterval(() => this.setState({ isVisible: !this.state.isVisible }), 1000);
+    this.props.setAddReaction(this.addReaction);
+  }
+
+  addReaction(label) {
+    this.setState({
+      items: this.state.items.concat([{ id: makeId(), text: label }]),
+    });
   }
 
   render() {
@@ -66,21 +77,18 @@ class Reactions extends React.PureComponent {
       <div>
         <ItemList
           items={this.state.items}
-          remove={id =>
-          this.setState({
-            items: this.state.items.filter(obj => obj.id !== id),
-          })}
+          // remove={id =>
+          // this.setState({
+          //   items: this.state.items.filter(obj => obj.id !== id),
+          // })}
         />
-        <FacebookSelector onSelect={label => this.setState({
-          items: this.state.items.concat([{ id: makeId(), text: label }]),
-        })}
+        <FacebookSelector
+          onSelect={(label) => {
+            // this.addReaction(label);
+            this.props.onSelect(label);
+          }}
         />
         <style jsx>{`
-         div {
-           margin-top: 500px;
-           color: red;
-         }
-
          div :global(.reaction) {
            position: fixed;
          }
@@ -94,5 +102,10 @@ class Reactions extends React.PureComponent {
     );
   }
 }
+
+Reactions.propTypes = {
+  onSelect: PropTypes.func.isRequired,
+  setAddReaction: PropTypes.func.isRequired,
+};
 
 export default Reactions;
