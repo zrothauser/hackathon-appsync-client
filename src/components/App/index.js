@@ -11,6 +11,9 @@ import appSyncClient from '../../api/appsync-client';
 
 import Home from '../Home';
 import Post from '../Post';
+import Reactions from '../Reactions';
+
+const NotFound = () => (<div>404</div>);
 
 const App = () => (
   <div>
@@ -25,6 +28,8 @@ const App = () => (
     <Router>
       <Home path="/" />
       <Post path="/posts/:slug" />
+      <Reactions path="/reactions" />
+      <NotFound default />
     </Router>
   </div>
 );
