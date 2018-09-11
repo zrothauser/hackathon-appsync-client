@@ -68,8 +68,12 @@ const Post = ({ slug }) => (
                           onSelect={action =>
                             addReaction({
                               variables: {
-                                context: slug,
-                                body: action,
+                                message: {
+                                  context: slug,
+                                  body: action,
+                                  id: Date.now(),
+                                  sentAt: Date.now(),
+                                },
                               },
                             })}
                           setAddReaction={(childAddReactionProp) => {
