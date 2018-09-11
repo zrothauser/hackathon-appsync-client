@@ -33,12 +33,13 @@ const Home = () => (
         <Container text>
           {posts.length ?
             <Item.Group divided>
-              {posts.map(({ node: { title }, node: { slug } }) => (
+              {posts.map(({ node: { title }, node: { slug } }, index) => (
                 <PostExcerpt
                   key={slug}
                   title={title}
                   url={`posts/${slug}`}
-                  imageURL={`https://loremflickr.com/320/240/dog?${Math.random()}`}
+                  imageURL={`https://loremflickr.com/640/480/dog?${Math.random()}`}
+                  index={index}
                 />
               ))
               }
