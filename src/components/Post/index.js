@@ -36,7 +36,7 @@ const Post = ({ slug }) => (
         } = postData;
 
         return (
-          <Container text style={{ marginTop: '7em' }}>
+          <Container text>
             <Header as="h1">
               {title}
             </Header>

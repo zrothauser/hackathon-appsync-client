@@ -1,6 +1,15 @@
 import React, { Component } from 'react';
-import { Link } from '@reach/router';
 import { Query } from 'react-apollo';
+import {
+  Container,
+  Header,
+  Form,
+  Input,
+  Item,
+  Divider,
+} from 'semantic-ui-react';
+
+import ReviewExcerpt from '../ReviewExcerpt';
 
 import QUERY_REVIEWS from '../../graphql/searchReviews';
 
@@ -15,12 +24,22 @@ class Reviews extends Component {
 
   render() {
     return (
-      <div>
-        <span>Search for reviews:</span>
-        <input
-          type="text"
-          onChange={event => this.setState({ searchTerms: event.target.value })}
-        />
+      <Container text>
+        <Header as="h1">
+          Reviews
+        </Header>
+
+        <Form>
+          <Form.Group>
+            <Form.Field
+              id="search-form-field"
+              control={Input}
+              placeholder="Fake Review"
+              label="Search for reviews"
+              onChange={event => this.setState({ searchTerms: event.target.value })}
+            />
+          </Form.Group>
+        </Form>
 
         <Query
           query={QUERY_REVIEWS}
@@ -33,30 +52,41 @@ class Reviews extends Component {
 
             if (error) {
               console.error('Error!', error); // eslint-disable-line no-console
-              return 'Error loading post';
+              return (<div>Error loading post</div>);
             }
 
-            console.log(data); // eslint-disable-line no-console
-
-            const posts = data.getByTitle;
+            const reviews = data.getReviewByTitle;
 
             return (
-              <div>
-                <h1>Reviews</h1>
+              <React.Fragment>
+                <Divider section />
                 <div>
-                  <ul>
-                    {posts.map(({ node: { title }, node: { slug } }) => (
-                      <li key={slug}>
-                        <Link to={`posts/${slug}`}>{title}</Link>
-                      </li>
-                    ))}
-                  </ul>
+                  <Header
+                    as="h3"
+                    content="Results"
+                  />
+
+                  <Container>
+                    {reviews.length ?
+                      <Item.Group divided>
+                        {reviews.map(review => (
+                          <ReviewExcerpt
+                            key={JSON.stringify(review)}
+                            {...review}
+                            imageURL={`https://loremflickr.com/320/240/dog?${Math.random()}`}
+                          />
+                        ))
+                        }
+                      </Item.Group>
+                    : 'No reviews found'
+                    }
+                  </Container>
                 </div>
-              </div>
+              </React.Fragment>
             );
           }}
         </Query>
-      </div>
+      </Container>
     );
   }
 }
