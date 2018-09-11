@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
-import { Link } from '@reach/router';
 import { Query } from 'react-apollo';
-import { Container, Header } from 'semantic-ui-react';
+import {
+  Container,
+  Header,
+  Form,
+  Input,
+} from 'semantic-ui-react';
 
 import QUERY_REVIEWS from '../../graphql/searchReviews';
 
@@ -20,11 +24,18 @@ class Reviews extends Component {
         <Header as="h1">
           Reviews
         </Header>
-        <span>Search for reviews:</span>
-        <input
-          type="text"
-          onChange={event => this.setState({ searchTerms: event.target.value })}
-        />
+
+        <Form>
+          <Form.Group>
+            <Form.Field
+              id="search-form-field"
+              control={Input}
+              placeholder="Fake Review"
+              label="Search for reviews"
+              onChange={event => this.setState({ searchTerms: event.target.value })}
+            />
+          </Form.Group>
+        </Form>
 
         <Query
           query={QUERY_REVIEWS}
@@ -40,21 +51,28 @@ class Reviews extends Component {
               return (<div>Error loading post</div>);
             }
 
-            console.log(data); // eslint-disable-line no-console
-
-            const posts = data.getReviewByTitle;
+            const reviews = data.getReviewByTitle;
 
             return (
               <div>
-                <h1>Reviews</h1>
+                <h2>Results</h2>
                 <div>
-                  <ul>
-                    {posts.map(({ title, url }) => (
-                      <li key={url}>
-                        <Link to={`posts/${url}`}>{title}</Link>
-                      </li>
-                    ))}
-                  </ul>
+                  {reviews.length ?
+                    <ul>
+                      {reviews.map(({ title, url }) => (
+                        <li key={url}>
+                          <a
+                            href={url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {title}
+                          </a>
+                        </li>
+                      ))}
+                    </ul> :
+                    'No reviews found'
+                  }
                 </div>
               </div>
             );
