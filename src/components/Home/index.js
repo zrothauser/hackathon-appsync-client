@@ -25,13 +25,16 @@ const Home = () => (
       return (
         <div>
           <h1>Home</h1>
-          <ul>
-            {posts.map(({ node: { title }, node: { slug } }) => (
-              <li key={slug}>
-                <Link to={`posts/${slug}`}>{title}</Link>
-              </li>
-            ))}
-          </ul>
+          <div>
+            <h2>Latest Posts</h2>
+            <ul>
+              {posts.map(({ node: { title }, node: { slug } }) => (
+                <li key={slug}>
+                  <Link to={`posts/${slug}`}>{title}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       );
     }}

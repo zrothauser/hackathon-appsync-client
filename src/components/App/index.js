@@ -10,20 +10,30 @@ import 'semantic-ui-css/semantic.min.css';
 import appSyncClient from '../../api/appsync-client';
 
 import Home from '../Home';
+import Reviews from '../Reviews';
 import Post from '../Post';
 
 const App = () => (
   <div>
     <Menu fixed="top" inverted>
       <Container>
+        <Menu.Item header>
+          <Link to="/">GAMEZ</Link>
+        </Menu.Item>
+
         <Menu.Item>
-          <Link to="/">AppSync Client</Link>
+          <Link to="/">Home</Link>
+        </Menu.Item>
+
+        <Menu.Item>
+          <Link to="/reviews/">Reviews</Link>
         </Menu.Item>
       </Container>
     </Menu>
 
     <Router>
       <Home path="/" />
+      <Reviews path="/reviews/" />
       <Post path="/posts/:slug" />
     </Router>
   </div>

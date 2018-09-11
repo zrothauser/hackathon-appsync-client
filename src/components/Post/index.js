@@ -8,64 +8,59 @@ import Inbox from '../Inbox';
 import wordpressClient from '../../api/wordpress-client';
 import QUERY_POST from '../../graphql/post';
 
-const Post = ({ slug }) => {
-  if (!slug) {
-    return;
-  }
+const Post = ({ slug }) => (
+  <Query
+    query={QUERY_POST}
+    variables={{ slug }}
+    client={wordpressClient}
+  >
+    {({ loading, error, data }) => {
+        if (loading) {
+          return null;
+        }
 
-  return (
-    <Query
-      query={QUERY_POST}
-      variables={{ slug }}
-      client={wordpressClient}
-    >
-      {({ loading, error, data }) => {
-          if (loading) {
-            return null;
-          }
+        if (error) {
+          console.error('Error!', error); // eslint-disable-line no-console
+          return 'Error loading post';
+        }
 
-          if (error) {
-            console.error('Error!', error); // eslint-disable-line no-console
-            return 'Error loading post';
-          }
+        const postData = data.postBy;
 
-          const postData = data.postBy;
+        const {
+          title,
+          author,
+          timestamp,
+          content,
+        } = postData;
 
-          const {
-            title,
-            author,
-            timestamp,
-            content,
-          } = postData;
+        return (
+          <Container text style={{ marginTop: '7em' }}>
+            <Header as="h1">
+              {title}
+            </Header>
+            <div>
+              <div>Author: {author}</div>
+              <div>Posted at: {timestamp}</div>
+              <div>Content:</div>
+              <div
+                // eslint-disable-next-line react/no-danger
+                dangerouslySetInnerHTML={{ __html: content }}
+              />
+            </div>
+            <div>
+              <span>Reactions:</span>
+            </div>
+            <div>
+              <span>Comments:</span>
+              <Inbox />
+            </div>
+          </Container>
+        );
+      }}
+  </Query>
+);
 
-          return (
-            <Container text style={{ marginTop: '7em' }}>
-              <Header as="h1">
-                {title}
-              </Header>
-              <div>
-                <div>Author: {author}</div>
-                <div>Posted at: {timestamp}</div>
-                <div>Content:</div>
-                <div
-                  dangerouslySetInnerHTML={{ __html: content }} // eslint-disable-line react/no-danger
-                />
-              </div>
-              <div>
-                <span>Reactions:</span>
-              </div>
-              <div>
-                <span>Comments:</span>
-                <Inbox />
-              </div>
-            </Container>
-          );
-        }}
-    </Query>
-  );
-};
-
-Post.defaultTypes = {
+Post.defaultProps = {
   slug: null,
 };
 
