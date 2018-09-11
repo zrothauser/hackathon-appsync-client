@@ -38,11 +38,19 @@ const App = () => (
           </Menu.Item>
 
           <Menu.Item>
-            <Link to="/">Home</Link>
+            <Link to="/">News</Link>
           </Menu.Item>
 
           <Menu.Item>
             <Link to="/reviews/">Reviews</Link>
+          </Menu.Item>
+
+          <Menu.Item>
+            <Link to="/">Platforms</Link>
+          </Menu.Item>
+
+          <Menu.Item>
+            <Link to="/">Community</Link>
           </Menu.Item>
         </Container>
       </Menu>

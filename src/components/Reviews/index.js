@@ -7,7 +7,6 @@ import {
   Form,
   Input,
   Item,
-  Divider,
 } from 'semantic-ui-react';
 
 import ReviewExcerpt from '../ReviewExcerpt';
@@ -61,29 +60,32 @@ class Reviews extends Component {
 
             return (
               <React.Fragment>
-                <Divider section />
-                <div>
-                  <Header
-                    as="h3"
-                    content="Results"
-                  />
+                <Header
+                  as="h3"
+                  content="Results"
+                />
 
-                  <Container>
-                    {reviews.length ?
-                      <Item.Group divided>
-                        {reviews.map(review => (
-                          <ReviewExcerpt
-                            key={JSON.stringify(review)}
-                            {...review}
-                            imageURL={`https://loremflickr.com/320/240/dog?${Math.random()}`}
-                          />
-                        ))
-                        }
-                      </Item.Group>
-                    : 'No reviews found'
-                    }
-                  </Container>
-                </div>
+                <Container>
+                  {reviews.length ?
+                    <Item.Group
+                      style={{
+                        display: 'flex',
+                        flexFlow: 'row wrap',
+                        justifyContent: 'space-between',
+                      }}
+                    >
+                      {reviews.map(review => (
+                        <ReviewExcerpt
+                          key={JSON.stringify(review)}
+                          {...review}
+                          imageURL={`https://loremflickr.com/640/480/dog?${Math.random()}`}
+                        />
+                      ))
+                      }
+                    </Item.Group>
+                  : 'No reviews found'
+                  }
+                </Container>
               </React.Fragment>
             );
           }}
