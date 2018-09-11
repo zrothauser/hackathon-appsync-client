@@ -30,7 +30,7 @@ const Home = () => (
       console.log(posts); // eslint-disable-line no-console
 
       return (
-        <Container text style={{ marginTop: '7em' }}>
+        <Container text>
           {posts.length ?
             <Item.Group divided>
               {posts.map(({ node: { title }, node: { slug } }) => (
@@ -38,7 +38,7 @@ const Home = () => (
                   key={slug}
                   title={title}
                   url={`posts/${slug}`}
-                  imageURL="https://loremflickr.com/320/240/dog"
+                  imageURL={`https://loremflickr.com/320/240/dog?${Math.random()}`}
                 />
               ))
               }

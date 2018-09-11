@@ -24,7 +24,7 @@ class Reviews extends Component {
 
   render() {
     return (
-      <Container text style={{ marginTop: '7em' }}>
+      <Container text>
         <Header as="h1">
           Reviews
         </Header>
@@ -73,7 +73,7 @@ class Reviews extends Component {
                           <ReviewExcerpt
                             key={JSON.stringify(review)}
                             {...review}
-                            imageURL="https://loremflickr.com/320/240/dog"
+                            imageURL={`https://loremflickr.com/320/240/dog?${Math.random()}`}
                           />
                         ))
                         }
