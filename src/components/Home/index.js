@@ -16,7 +16,7 @@ const Home = () => (
       }
 
       if (error) {
-        console.error('Error!', error);
+        console.error('Error!', error); // eslint-disable-line no-console
         return 'Error loading post';
       }
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Query } from 'react-apollo';
 import { Container, Header } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
 
 import Inbox from '../Inbox';
 
@@ -19,7 +20,7 @@ const Post = ({ slug }) => (
         }
 
         if (error) {
-          console.error('Error!', error);
+          console.error('Error!', error); // eslint-disable-line no-console
           return 'Error loading post';
         }
 
@@ -41,7 +42,9 @@ const Post = ({ slug }) => (
               <div>Author: {author}</div>
               <div>Posted at: {timestamp}</div>
               <div>Content:</div>
-              <div dangerouslySetInnerHTML={{ __html: content }} />
+              <div
+                dangerouslySetInnerHTML={{ __html: content }} // eslint-disable-line react/no-danger
+              />
             </div>
             <div>
               <span>Reactions:</span>
@@ -55,5 +58,9 @@ const Post = ({ slug }) => (
       }}
   </Query>
 );
+
+Post.propTypes = {
+  slug: PropTypes.string.isRequired,
+};
 
 export default Post;
