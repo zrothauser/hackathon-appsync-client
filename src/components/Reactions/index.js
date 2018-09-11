@@ -1,43 +1,49 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FacebookSelector } from 'react-reactions';
 import posed, { PoseGroup } from 'react-pose';
 import icons from 'react-reactions/src/helpers/icons';
 
-const Box = posed.div({
-  visible: { y: 0 },
-  hidden: { y: -500 }
-});
-
 const Item = posed.li({
   enter: {
     y: -1000,
-    transition: { duration: 2000 }
+    transition: { duration: 2000 },
   },
 });
 
 let lastId = 0;
 
-const makeId = (prefix='id') => {
-    lastId++;
-    return `${prefix}${lastId}`;
-}
+const makeId = (prefix = 'id') => {
+  lastId += 1;
+  return `${prefix}${lastId}`;
+};
 
 const ItemList = ({ items, remove }) => (
   <ul className="list">
     <PoseGroup>
       {items.map(item =>
-        <Item className="reaction" onPoseComplete={() => remove(item.id)} key={item.id}>
-          <img src={icons.find('facebook', item.text)} />
-        </Item>)
-      }
+        (
+          <Item className="reaction" onPoseComplete={() => remove(item.id)} key={item.id}>
+            <img alt="" src={icons.find('facebook', item.text)} />
+          </Item>
+        ))}
     </PoseGroup>
-  <style jsx>{`
+    <style jsx>{`
     img {
       width: 50px;
     }
-  `}</style>
+  `}
+    </style>
   </ul>
 );
+
+ItemList.propTypes = {
+  items: PropTypes.shape({
+    id: PropTypes.number,
+    text: PropTypes.string,
+  }),
+  remove: PropTypes.func,
+};
 
 class Reactions extends React.PureComponent {
   constructor() {
@@ -58,14 +64,17 @@ class Reactions extends React.PureComponent {
   render() {
     return (
       <div>
-        <ItemList items={this.state.items} remove={id =>
+        <ItemList
+          items={this.state.items}
+          remove={id =>
           this.setState({
-            items: this.state.items.filter(( obj ) => obj.id !== id)
+            items: this.state.items.filter(obj => obj.id !== id),
           })}
         />
-        <FacebookSelector onSelect={(label) => this.setState({
-          items: this.state.items.concat([{ id: makeId(), text: label }])
-        })} />
+        <FacebookSelector onSelect={label => this.setState({
+          items: this.state.items.concat([{ id: makeId(), text: label }]),
+        })}
+        />
         <style jsx>{`
          div {
            margin-top: 500px;
@@ -79,9 +88,10 @@ class Reactions extends React.PureComponent {
          div :global(.list) {
             list-style: none;
          }
-       `}</style>
-    	</div>
-    )
+       `}
+        </style>
+      </div>
+    );
   }
 }
 
