@@ -7,11 +7,13 @@ import Inbox from '../Inbox';
 import wordpressClient from '../../api/wordpress-client';
 import QUERY_POST from '../../graphql/post';
 
-// import posts from '../../test-data';
-
 const Post = ({ slug }) => {
   return (
-    <Query query={QUERY_POST} variables={{ slug }} client={wordpressClient}>
+    <Query
+      query={QUERY_POST}
+      variables={{ slug }}
+      client={wordpressClient}
+    >
       {({ loading, error, data }) => {
         if (loading) {
           return null;

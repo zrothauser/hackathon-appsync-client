@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-const QUERY = gql`
+export default gql`
   query Post($slug: String!) {
     postBy(slug: $slug) {
       id
@@ -10,5 +10,3 @@ const QUERY = gql`
     }
   }
 `;
-
-export default QUERY;
