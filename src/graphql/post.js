@@ -5,7 +5,7 @@ export default gql`
     postBy(slug: $slug) {
       id
       title
-      date
+      modified
       content
     }
   }

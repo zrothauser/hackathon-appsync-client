@@ -32,7 +32,6 @@ const Post = ({ slug }) => (
 
         const {
           title,
-          author,
           timestamp,
           content,
         } = postData;
@@ -42,18 +41,16 @@ const Post = ({ slug }) => (
             <Header as="h1">
               {title}
             </Header>
+
             <div>
-              <div>Author: {author}</div>
-              <div>Posted at: {formatTimestamp(timestamp)}</div>
-              <div>Content:</div>
+              <div>{formatTimestamp(timestamp)}</div>
               <div
                 // eslint-disable-next-line react/no-danger
                 dangerouslySetInnerHTML={{ __html: content }}
               />
             </div>
-            <div>
-              <span>Reactions:</span>
 
+            <div>
               <Subscription
                 subscription={INBOX_SUB}
                 variables={{ context: slug }}
@@ -87,9 +84,6 @@ const Post = ({ slug }) => (
                   );
                 }}
               </Subscription>
-            </div>
-            <div>
-              <span>Comments:</span>
             </div>
           </Container>
         );
