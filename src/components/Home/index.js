@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from '@reach/router'
-import { Query } from "react-apollo";
+import { Link } from '@reach/router';
+import { Query } from 'react-apollo';
 
 import wordpressClient from '../../api/wordpress-client';
 import QUERY_POSTS from '../../graphql/posts';
@@ -26,7 +26,7 @@ const Home = () => (
         <div>
           <h1>Home</h1>
           <ul>
-            {posts.map(({ node: {title}, node: {slug} }) => (
+            {posts.map(({ node: { title }, node: { slug } }) => (
               <li key={slug}>
                 <Link to={`posts/${slug}`}>{title}</Link>
               </li>

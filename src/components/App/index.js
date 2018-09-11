@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
-import { ApolloProvider } from "react-apollo";
-import { Rehydrated } from "aws-appsync-react";
-import { Router, Link } from "@reach/router"
-import { Container, Menu } from 'semantic-ui-react'
+import { ApolloProvider } from 'react-apollo';
+import { Rehydrated } from 'aws-appsync-react';
+import { Router, Link } from '@reach/router';
+import { Container, Menu } from 'semantic-ui-react';
 
 import appSyncClient from '../../api/appsync-client';
 
@@ -16,7 +16,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Menu fixed='top' inverted>
+        <Menu fixed="top" inverted>
           <Container>
             <Menu.Item>
               <Link to="/">AppSync Client</Link>
