@@ -57,8 +57,6 @@ class Reviews extends Component {
 
             const reviews = data.getReviewByTitle;
 
-            console.log(reviews); // eslint-disable-line
-
             return (
               <React.Fragment>
                 <Divider section />
@@ -73,6 +71,7 @@ class Reviews extends Component {
                       <Item.Group divided>
                         {reviews.map(review => (
                           <ReviewExcerpt
+                            key={JSON.stringify(review)}
                             {...review}
                             imageURL="https://loremflickr.com/320/240/dog"
                           />
