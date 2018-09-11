@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Query } from 'react-apollo';
 import {
+  Loader,
   Container,
   Header,
   Form,
@@ -46,7 +47,9 @@ class Reviews extends Component {
         >
           {({ loading, error, data }) => {
             if (loading) {
-              return null;
+              return (
+                <Loader>Loading</Loader>
+              );
             }
 
             if (error) {
