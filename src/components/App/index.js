@@ -12,6 +12,9 @@ import appSyncClient from '../../api/appsync-client';
 import Home from '../Home';
 import Reviews from '../Reviews';
 import Post from '../Post';
+import Reactions from '../Reactions';
+
+const NotFound = () => (<div>404</div>);
 
 const App = () => (
   <div>
@@ -35,6 +38,8 @@ const App = () => (
       <Home path="/" />
       <Reviews path="/reviews/" />
       <Post path="/posts/:slug" />
+      <Reactions path="/reactions" />
+      <NotFound default />
     </Router>
   </div>
 );
