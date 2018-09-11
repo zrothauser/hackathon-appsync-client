@@ -12,10 +12,13 @@ import {
 
 import Home from '../Home';
 import Post from '../Post';
+import Reactions from '../Reactions';
 
 import 'semantic-ui-css/semantic.min.css';
 
 import APPSYNC_CONFIG from '../../appsync-config';
+
+const NotFound = () => (<div>404</div>);
 
 class App extends Component {
   render() {
@@ -32,6 +35,8 @@ class App extends Component {
         <Router>
           <Home path="/" />
           <Post path="/posts/:slug" />
+          <Reactions path="/reactions" />
+          <NotFound default />
         </Router>
       </div>
     );
