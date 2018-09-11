@@ -41,8 +41,8 @@ ItemList.propTypes = {
   items: PropTypes.shape({
     id: PropTypes.number,
     text: PropTypes.string,
-  }),
-  remove: PropTypes.func,
+  }).isRequired,
+  remove: PropTypes.func.isRequired,
 };
 
 class Reactions extends React.PureComponent {
