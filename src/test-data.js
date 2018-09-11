@@ -1,7 +1,7 @@
 export default [
     {
         title: 'The Next Big Thing in React',
-        body: 'Something',
+        content: 'Something',
         author: 'Somebody',
         timestamp: 'today',
         id: 1234,
@@ -9,7 +9,7 @@ export default [
     },
     {
         title: 'WordPress: Expectations vs. Reality',
-        body: 'Something',
+        content: 'Something',
         author: 'Somebody',
         timestamp: 'today',
         id: 1235,

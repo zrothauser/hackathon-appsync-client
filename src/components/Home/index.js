@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from '@reach/router'
-import Inbox from '../Inbox';
 
 import posts from '../../test-data';
 
@@ -14,8 +13,6 @@ const Home = () => (
         </li>
       ))}
     </ul>
-    <Inbox />
-
   </div>
 );
 
