@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from '@reach/router';
 import { Query } from 'react-apollo';
+import { Container, Header } from 'semantic-ui-react';
 
 import QUERY_REVIEWS from '../../graphql/searchReviews';
 
@@ -15,7 +16,10 @@ class Reviews extends Component {
 
   render() {
     return (
-      <div>
+      <Container text style={{ marginTop: '7em' }}>
+        <Header as="h1">
+          Reviews
+        </Header>
         <span>Search for reviews:</span>
         <input
           type="text"
@@ -33,21 +37,21 @@ class Reviews extends Component {
 
             if (error) {
               console.error('Error!', error); // eslint-disable-line no-console
-              return 'Error loading post';
+              return (<div>Error loading post</div>);
             }
 
             console.log(data); // eslint-disable-line no-console
 
-            const posts = data.getByTitle;
+            const posts = data.getReviewByTitle;
 
             return (
               <div>
                 <h1>Reviews</h1>
                 <div>
                   <ul>
-                    {posts.map(({ node: { title }, node: { slug } }) => (
-                      <li key={slug}>
-                        <Link to={`posts/${slug}`}>{title}</Link>
+                    {posts.map(({ title, url }) => (
+                      <li key={url}>
+                        <Link to={`posts/${url}`}>{title}</Link>
                       </li>
                     ))}
                   </ul>
@@ -56,7 +60,7 @@ class Reviews extends Component {
             );
           }}
         </Query>
-      </div>
+      </Container>
     );
   }
 }
