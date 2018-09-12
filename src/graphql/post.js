@@ -1,13 +1,16 @@
 import gql from 'graphql-tag';
 
+
 export default gql`
-  query Post($slug: String!) {
-    postBy(slug: $slug) {
-      id
-      title
-      modified
-      content
-      featured_image_url
+  query getPostBySlug($slug: String!){
+    getPostBySlug(slug: $slug){
+      items {
+        id
+        title
+        date
+        content
+        featured_image_url
+      }
     }
   }
 `;

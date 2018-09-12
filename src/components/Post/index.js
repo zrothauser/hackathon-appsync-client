@@ -4,8 +4,7 @@ import { Container, Header } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
 import Reactions from '../Reactions';
-import wordpressClient from '../../api/wordpress-client';
-import QUERY_POST from '../../graphql/post-wp';
+import QUERY_POST from '../../graphql/post';
 import INBOX_SUB from '../../graphql/inboxSubscription';
 import MESSAGE_MUTATION from '../../graphql/messageMutation';
 
@@ -16,7 +15,6 @@ const Post = ({ slug }) => (
   <Query
     query={QUERY_POST}
     variables={{ slug }}
-    client={wordpressClient}
   >
     {({ loading, error, data }) => {
         if (loading) {
@@ -28,11 +26,11 @@ const Post = ({ slug }) => (
           return 'Error loading post';
         }
 
-        const postData = data.postBy;
+        const postData = data.getPostBySlug.items[0];
 
         const {
           title,
-          timestamp,
+          date: timestamp,
           content,
         } = postData;
 
@@ -43,7 +41,9 @@ const Post = ({ slug }) => (
             </Header>
 
             <div>
-              <div>{formatTimestamp(timestamp)}</div>
+              <div style={{ marginBottom: '2em' }}>
+                {formatTimestamp(timestamp)}
+              </div>
               <div
                 // eslint-disable-next-line react/no-danger
                 dangerouslySetInnerHTML={{ __html: content }}
