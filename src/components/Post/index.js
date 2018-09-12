@@ -11,6 +11,7 @@ import MESSAGE_MUTATION from '../../graphql/messageMutation';
 import { formatTimestamp } from '../PostExcerpt'; // refactor this later
 
 let childAddReaction;
+const localReactions = [];
 const Post = ({ slug }) => (
   <Query
     query={QUERY_POST}
@@ -56,7 +57,10 @@ const Post = ({ slug }) => (
                 variables={{ context: slug }}
               >
                 {(response) => {
-                  if (!response.loading) {
+                  if (
+                    !response.loading &&
+                    localReactions.indexOf(parseInt(response.data.inbox.id, 10)) === -1
+                  ) {
                     // eslint-disable-next-line no-unused-expressions
                     typeof childAddReaction === 'function' && childAddReaction(response.data.inbox.body);
                   }
@@ -64,17 +68,20 @@ const Post = ({ slug }) => (
                     <Mutation mutation={MESSAGE_MUTATION}>
                       {addReaction => (
                         <Reactions
-                          onSelect={action =>
+                          onSelect={(action) => {
+                            const id = Date.now();
+                            localReactions.push(id);
                             addReaction({
                               variables: {
                                 message: {
+                                  id,
                                   context: slug,
                                   body: action,
-                                  id: Date.now(),
                                   sentAt: Date.now(),
                                 },
                               },
-                            })}
+                            });
+                          }}
                           setAddReaction={(childAddReactionProp) => {
                             childAddReaction = childAddReactionProp;
                           }}

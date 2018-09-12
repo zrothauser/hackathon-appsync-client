@@ -5,5 +5,6 @@ subscription Inbox($context: String) {
   inbox(context: $context) {
     context
     body
+    id
   }
 }`;

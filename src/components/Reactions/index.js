@@ -69,7 +69,7 @@ class Reactions extends React.PureComponent {
         <canvas ref={(c) => { this.canvas = c; }} width={600} height={500} />
         <FacebookSelector
           onSelect={(label) => {
-            // this.addReaction(label);
+            this.addReaction(label);
             this.props.onSelect(label);
           }}
         />
