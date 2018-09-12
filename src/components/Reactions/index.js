@@ -8,14 +8,15 @@ function ReactionImage(src, x) {
   this.image.src = src;
   this.x = x;
   this.y = 500;
-  this.vx = 5;
-  this.vy = 10;
+  this.vy = 5;
   this.width = 50;
   this.height = 50;
   this.draw = function (ctx) {
     ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
   };
 }
+
+const easeInCubic = t => t * t * t;
 
 class Reactions extends React.PureComponent {
   constructor(props) {
@@ -51,13 +52,21 @@ class Reactions extends React.PureComponent {
     ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
     this.state.images.forEach((image) => {
+      if (image.y <= 0) {
+        const newImages = this.state.images.slice(0);
+        const index = newImages.indexOf(image);
+        newImages.splice(index, 1);
+        this.setState({ images: newImages });
+      }
+
       image.draw(ctx);
+      const easing = easeInCubic(400 / image.y);
       // eslint-disable-next-line no-param-reassign
-      image.y -= image.vy;
+      image.y -= image.vy * easing;
       // eslint-disable-next-line no-param-reassign
-      image.width -= 1;
+      image.width -= easing * 0.5;
       // eslint-disable-next-line no-param-reassign
-      image.height -= 1;
+      image.height -= easing * 0.5;
     });
 
     window.requestAnimationFrame(this.updateCanvas);
