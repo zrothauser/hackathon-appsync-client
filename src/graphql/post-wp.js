@@ -11,7 +11,6 @@ export default gql`
       title
       modified
       content
-      featured_image_url
     }
   }
 `;
