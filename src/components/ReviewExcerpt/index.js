@@ -2,6 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Item } from 'semantic-ui-react';
 
+import Icon from '../Icon';
+
+// Sometimes we have multiple genres, but just want the first
+// one for the icon
+const getFirstGenre = (genreString) => {
+  const genres = genreString.split(',');
+  return genres[0] ? genres[0] : '';
+};
+
 const ReviewExcerpt = ({
   title,
   url,
@@ -17,6 +26,7 @@ const ReviewExcerpt = ({
       href={`http://ign.com${url}`} // this isn't a real URL from the dataset
       target="_blank"
       style={{
+        width: 'auto',
         margin: '0 0 4em',
         textAlign: 'center',
         flex: '0 1 220px',
@@ -39,7 +49,12 @@ const ReviewExcerpt = ({
           {`${title} (${year})`}
         </Item.Header>
         <Item.Meta>
-          <span>☺︎ {genre}</span><br />
+          <div className="genre">
+            <span className="genre__icon">
+              <Icon iconName={getFirstGenre(genre)} />
+            </span>
+            {genre}
+          </div>
           <span className={`score ${(score >= 8) ? 'score--good' : 'score--bad'}`}>
             {score}
           </span>
@@ -64,6 +79,12 @@ const ReviewExcerpt = ({
       .score--bad {
         background: #f75151;
       }
+
+      .genre__icon {
+        display: inline-block;
+        padding-right: 0.5em;
+        vertical-align: middle;
+      }
     `}
     </style>
   </React.Fragment>
@@ -74,7 +95,7 @@ ReviewExcerpt.propTypes = {
   url: PropTypes.string.isRequired,
   year: PropTypes.string.isRequired,
   genre: PropTypes.string.isRequired,
-  score: PropTypes.number.isRequired,
+  score: PropTypes.string.isRequired,
   imageURL: PropTypes.string.isRequired,
 };
 

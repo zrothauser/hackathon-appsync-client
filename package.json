@@ -125,15 +125,7 @@
         {
           "plugins": [
             [
-              "styled-jsx-plugin-sass",
-              {
-                "sassOptions": {
-                  "includePaths": [
-                    "./node_modules/unibody/assets/stylesheets/"
-                  ],
-                  "precision": 2
-                }
-              }
+              "styled-jsx-plugin-sass"
             ]
           ]
         }
