@@ -38,7 +38,7 @@ class Reviews extends Component {
             onChange={event => this.setState({ searchTerms: event.target.value })}
             icon="search"
             iconPosition="left"
-            style={{ marginBottom: '2em' }}
+            style={{ margin: '0.5em 0 2.5em' }}
           />
         </Form>
 
@@ -67,7 +67,7 @@ class Reviews extends Component {
                     <React.Fragment>
                       <Header
                         as="h3"
-                        content={(this.state.searchTerms ? 'Results' : 'Top Reviewed Games')}
+                        content={(this.state.searchTerms ? 'Results' : 'Top reviewed games')}
                       />
                       <Item.Group
                         style={{
