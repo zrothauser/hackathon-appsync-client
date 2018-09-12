@@ -12,6 +12,7 @@ import {
 import ReviewExcerpt from '../ReviewExcerpt';
 
 import QUERY_REVIEWS from '../../graphql/searchReviews';
+import QUERY_TOP_REVIEWS from '../../graphql/topReviews';
 
 class Reviews extends Component {
   constructor(props) {
@@ -42,7 +43,7 @@ class Reviews extends Component {
         </Form>
 
         <Query
-          query={QUERY_REVIEWS}
+          query={(this.state.searchTerms ? QUERY_REVIEWS : QUERY_TOP_REVIEWS)}
           variables={{ title: this.state.searchTerms }}
         >
           {({ loading, error, data }) => {
@@ -57,39 +58,37 @@ class Reviews extends Component {
               return (<div>Error loading post</div>);
             }
 
-            const reviews = data.getReviewByTitle;
+            const reviews = this.state.searchTerms ? data.getReviewByTitle : data.getReviewByScore;
 
             return (
               <React.Fragment>
-                {this.state.searchTerms &&
-                  <Container>
-                    {reviews.length ?
-                      <React.Fragment>
-                        <Header
-                          as="h3"
-                          content="Results"
-                        />
-                        <Item.Group
-                          style={{
-                            display: 'flex',
-                            flexFlow: 'row wrap',
-                            justifyContent: 'space-between',
-                          }}
-                        >
-                          {reviews.map(review => (
-                            <ReviewExcerpt
-                              key={JSON.stringify(review)}
-                              {...review}
-                              imageURL={`https://loremflickr.com/640/480/dog?${Math.random()}`}
-                            />
-                          ))
-                          }
-                        </Item.Group>
-                      </React.Fragment>
-                    : 'No reviews found'
-                    }
-                  </Container>
-                }
+                <Container>
+                  {reviews.length ?
+                    <React.Fragment>
+                      <Header
+                        as="h3"
+                        content={(this.state.searchTerms ? 'Results' : 'Top Reviewed Games')}
+                      />
+                      <Item.Group
+                        style={{
+                          display: 'flex',
+                          flexFlow: 'row wrap',
+                          justifyContent: 'space-between',
+                        }}
+                      >
+                        {reviews.map(review => (
+                          <ReviewExcerpt
+                            key={JSON.stringify(review)}
+                            {...review}
+                            imageURL={`https://loremflickr.com/640/480/dog?${Math.random()}`}
+                          />
+                        ))
+                        }
+                      </Item.Group>
+                    </React.Fragment>
+                  : 'No reviews found'
+                  }
+                </Container>
               </React.Fragment>
             );
           }}
