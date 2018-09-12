@@ -90,7 +90,7 @@ class Reactions extends React.PureComponent {
         />
         <style jsx>{`
          div :global(.reaction) {
-           position: fixed;
+           position: absolute;
          }
 
          div :global(.list) {
