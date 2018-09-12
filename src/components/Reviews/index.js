@@ -37,6 +37,7 @@ class Reviews extends Component {
             onChange={event => this.setState({ searchTerms: event.target.value })}
             icon="search"
             iconPosition="left"
+            style={{ marginBottom: '2em' }}
           />
         </Form>
 
@@ -60,32 +61,35 @@ class Reviews extends Component {
 
             return (
               <React.Fragment>
-                <Header
-                  as="h3"
-                  content="Results"
-                />
-
-                <Container>
-                  {reviews.length ?
-                    <Item.Group
-                      style={{
-                        display: 'flex',
-                        flexFlow: 'row wrap',
-                        justifyContent: 'space-between',
-                      }}
-                    >
-                      {reviews.map(review => (
-                        <ReviewExcerpt
-                          key={JSON.stringify(review)}
-                          {...review}
-                          imageURL={`https://loremflickr.com/640/480/dog?${Math.random()}`}
+                {this.state.searchTerms &&
+                  <Container>
+                    {reviews.length ?
+                      <React.Fragment>
+                        <Header
+                          as="h3"
+                          content="Results"
                         />
-                      ))
-                      }
-                    </Item.Group>
-                  : 'No reviews found'
-                  }
-                </Container>
+                        <Item.Group
+                          style={{
+                            display: 'flex',
+                            flexFlow: 'row wrap',
+                            justifyContent: 'space-between',
+                          }}
+                        >
+                          {reviews.map(review => (
+                            <ReviewExcerpt
+                              key={JSON.stringify(review)}
+                              {...review}
+                              imageURL={`https://loremflickr.com/640/480/dog?${Math.random()}`}
+                            />
+                          ))
+                          }
+                        </Item.Group>
+                      </React.Fragment>
+                    : 'No reviews found'
+                    }
+                  </Container>
+                }
               </React.Fragment>
             );
           }}
