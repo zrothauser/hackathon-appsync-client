@@ -98,7 +98,7 @@ const PostExcerpt = ({
           .post-excerpt-image.post-excerpt-image > img {
             display: block !important;
             max-width: 100% !important;
-            max-height: 100% !important;
+            max-height: none !important;
             position: absolute !important;
             top: 0 !important;
             bottom: 0 !important;
