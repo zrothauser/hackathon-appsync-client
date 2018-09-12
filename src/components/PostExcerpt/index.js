@@ -112,9 +112,13 @@ const PostExcerpt = ({
   );
 };
 
+PostExcerpt.defaultProps = {
+  excerpt: '',
+};
+
 PostExcerpt.propTypes = {
   title: PropTypes.string.isRequired,
-  excerpt: PropTypes.string.isRequired,
+  excerpt: PropTypes.string,
   date: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
   imageURL: PropTypes.string.isRequired,
