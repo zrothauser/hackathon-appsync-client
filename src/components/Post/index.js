@@ -4,7 +4,7 @@ import { Container, Header } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
 import Reactions from '../Reactions';
-import wordpressClient from '../../api/wordpress-client';
+// import wordpressClient from '../../api/wordpress-client';
 import QUERY_POST from '../../graphql/post';
 import INBOX_SUB from '../../graphql/inboxSubscription';
 import MESSAGE_MUTATION from '../../graphql/messageMutation';
@@ -16,7 +16,8 @@ const Post = ({ slug }) => (
   <Query
     query={QUERY_POST}
     variables={{ slug }}
-    client={wordpressClient}
+    // Add this line back in if AppSync doesn't work:
+    // client={wordpressClient}
   >
     {({ loading, error, data }) => {
         if (loading) {

@@ -56,32 +56,59 @@ const PostExcerpt = ({
   }
 
   return (
-    <Item
-      key={url}
-      as="a"
-      href={url}
-      style={{
-        marginBottom: '4em',
-      }}
-    >
-      <Item.Image
-        src={imageURL}
-        size="large"
-      />
-      <Item.Content>
-        <Item.Header as="h3">
-          {title}
-        </Item.Header>
-        <div style={{ color: 'grey' }}>
-          {formatTimestamp(date)}
-        </div>
-        <div
-          // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{ __html: excerpt }}
-          style={{ color: '#000000' }}
+    <React.Fragment>
+      <Item
+        key={url}
+        as="a"
+        href={url}
+        style={{
+          marginBottom: '4em',
+        }}
+      >
+        <Item.Image
+          src={imageURL}
+          size="large"
+          className="post-excerpt-image"
         />
-      </Item.Content>
-    </Item>
+        <Item.Content>
+          <Item.Header as="h3">
+            {title}
+          </Item.Header>
+          <div style={{ color: 'grey' }}>
+            {formatTimestamp(date)}
+          </div>
+          <div
+            // eslint-disable-next-line react/no-danger
+            dangerouslySetInnerHTML={{ __html: excerpt }}
+            style={{ color: '#000000' }}
+          />
+        </Item.Content>
+      </Item>
+
+      <style jsx global>{`
+        /* 😢 */
+        @media only screen and (min-width: 768px) {
+          .post-excerpt-image.post-excerpt-image {
+            height: auto !important;
+            position: relative !important;
+            overflow: hidden !important;
+            padding: 32% 0 0 0 !important;
+          }
+
+          .post-excerpt-image.post-excerpt-image > img {
+            display: block !important;
+            max-width: 100% !important;
+            max-height: 100% !important;
+            position: absolute !important;
+            top: 0 !important;
+            bottom: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+          }
+        }
+      `}
+      </style>
+    </React.Fragment>
   );
 };
 

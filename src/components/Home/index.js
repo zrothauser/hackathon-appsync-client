@@ -8,13 +8,11 @@ import {
 
 import PostExcerpt from '../PostExcerpt';
 
-import wordpressClient from '../../api/wordpress-client';
 import QUERY_POSTS from '../../graphql/posts';
 
 const Home = () => (
   <Query
     query={QUERY_POSTS}
-    client={wordpressClient}
   >
     {({ loading, error, data }) => {
       if (loading) {
@@ -28,29 +26,26 @@ const Home = () => (
         return 'Error loading post';
       }
 
-      const posts = data.posts.edges;
-
-      console.log(posts); // eslint-disable-line no-console
+      const posts = data.listPosts.items;
 
       return (
         <Container text>
           {posts.length ?
             <Item.Group>
               {posts.map(({
-                node: {
-                  title,
-                  slug,
-                  excerpt,
-                  modified,
-                },
+                title,
+                slug,
+                excerpt,
+                date,
+                featured_image_url: featuredImageURL,
               }, index) => (
                 <PostExcerpt
                   key={slug}
                   title={title}
                   excerpt={excerpt}
                   url={`posts/${slug}`}
-                  date={modified}
-                  imageURL={`https://loremflickr.com/640/480/dog?${Math.random()}`}
+                  date={date}
+                  imageURL={featuredImageURL}
                   index={index}
                 />
               ))

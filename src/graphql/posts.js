@@ -1,16 +1,15 @@
 import gql from 'graphql-tag';
 
 export default gql`
-{
-  posts {
-    edges {
-      node {
-        id
-        title
-        slug
-        modified
-        excerpt
-      }
+query listPosts {
+  listPosts{
+    items{
+      id
+      title
+      excerpt
+      slug
+      date
+      featured_image_url
     }
   }
 }
